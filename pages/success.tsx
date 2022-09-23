@@ -12,6 +12,7 @@ import {
 } from '@heroicons/react/outline';
 import { useMediaQuery } from 'react-responsive';
 import Currency from 'react-currency-formatter';
+import { useSession } from 'next-auth/react';
 
 import { fetchLineItems } from '../utils/fetchLineItems';
 import Button from '../components/Button';
@@ -21,6 +22,7 @@ interface Props {
 }
 
 function Success({ products }: Props) {
+  const { data: session } = useSession();
   const router = useRouter();
   const { session_id } = router.query;
   const [mounted, setMounted] = useState(false);
@@ -81,7 +83,7 @@ function Success({ products }: Props) {
               </p>
               <h4 className='text-lg'>
                 Thank you{' '}
-                {/* {session ? session.user?.name?.split(' ')[0] : 'Guest'} */}
+                {session ? session.user?.name?.split(' ')[0] : 'Guest'}
               </h4>
             </div>
           </div>

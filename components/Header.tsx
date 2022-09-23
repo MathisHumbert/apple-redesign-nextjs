@@ -7,11 +7,12 @@ import {
   ShoppingBagIcon,
   UserIcon,
 } from '@heroicons/react/outline';
+import { signIn, signOut, useSession } from 'next-auth/react';
 
 import { selectBasketItems } from '../redux/basketSlice';
 
 function Header() {
-  const session = false;
+  const { data: session } = useSession();
   const items = useSelector(selectBasketItems);
 
   return (
@@ -48,20 +49,17 @@ function Header() {
         {session ? (
           <Image
             src={
-              // session.user?.image ||
+              session.user?.image ||
               'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y'
             }
             alt=''
             className='cursor-pointer rounded-full'
             width={34}
             height={34}
-            // onClick={() => signOut()}
+            onClick={() => signOut()}
           />
         ) : (
-          <UserIcon
-            className='headerIcon'
-            // onClick={() => signOut()}
-          />
+          <UserIcon className='headerIcon' onClick={() => signIn()} />
         )}
       </div>
     </header>
