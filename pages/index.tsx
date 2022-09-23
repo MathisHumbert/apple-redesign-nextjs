@@ -8,6 +8,7 @@ import { fetchProducts } from '../utils/fetchProducts';
 import Header from '../components/Header';
 import Landing from '../components/Landing';
 import Product from '../components/Product';
+import Basket from '../components/Basket';
 
 interface Props {
   categories: Category[];
@@ -29,6 +30,9 @@ const Home: NextPage<Props> = ({ categories, products }) => {
       </Head>
 
       <Header />
+
+      <Basket />
+
       <main className='relative h-[200vh] bg-[#E7ECEE]'>
         <Landing />
       </main>
